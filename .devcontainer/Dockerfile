@@ -25,6 +25,19 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 ENV DEBIAN_FRONTEND=dialog
 
+# ROS2 simulation dependencies
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update \
+   && apt-get -y install --no-install-recommends \
+    ros-jazzy-joint-state-publisher \
+    ros-jazzy-gz-ros2-control \
+    ros-jazzy-ros2-control \
+    ros-jazzy-ros2-controllers \
+   && apt-get autoremove -y \
+   && apt-get clean -y \
+   && rm -rf /var/lib/apt/lists/*
+ENV DEBIAN_FRONTEND=dialog
+
 ### For Windows, uncomment the following lines to install WSLg dependencies and utilize vGPU acceleration 
 # ENV DEBIAN_FRONTEND=noninteractive
 # RUN apt-get update \
